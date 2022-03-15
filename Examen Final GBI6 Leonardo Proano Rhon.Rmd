@@ -1,0 +1,24 @@
+---
+title: "Examen Final Bioinformatica"
+author: "Leonardo Francisco Proaño Rhon"
+date: "15/3/2022"
+output: 
+  html_document:
+    self_contained: true
+    fig_height: 6
+    fight_width: 8
+    theme: journal
+    highlight: espresso
+    toc: yes
+    toc_depht: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+## Resolución del Examen Final
+### Pregunta 1: Manipulación de datos
+#### 1.1.
+
+```{r setup, include=FALSE}
+
+```
