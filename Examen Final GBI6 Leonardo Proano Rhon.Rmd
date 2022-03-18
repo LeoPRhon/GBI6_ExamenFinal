@@ -15,11 +15,101 @@ output:
       collapsed: no
       smooth_scroll: yes
 ---
+![](./data/img/ikiam.png)
+
+
 ## Resolución del Examen Final
 ### Pregunta 1: Manipulación de datos
-#### 1.1.
+#### 1.1. Defina su directorio de trabajo.
 
 ```{r setup, include=FALSE}
-getwd()
+setwd("D:/Documentos/GitHub/GBI6_ExamenFinal")
+
+```
+
+#### 1.2. Cargue la data “mRNA_expr.csv”
+
+```{r data}
+library(readr)
+
+df <- read_csv("./data/mRNA_expr.csv")
+head(df)
+```
+
+#### 1.3.Cree una función de nombre long_df para transformar la data df de la forma wide a long.
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 1.4.Genere la data df_long utilizandola función long_df.
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 1.5 A partir de la data df_long, genere un Descriptive table (librería sjPlot) y guárdelo en el subdirectorio “result” con el nombre mRNA_expr_summary.doc (previamente debe seleccionar las celdas adecuadas con funciones de la librería dplyr en conjunto con el operador %>%).
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 1.6 Interprete los resultados de la tabla resultante de la sección 1.5.
+
+```{r setup, include=FALSE}
+
+
+```
+
+### Pregunta 2: Visualización de datos
+#### 2.1 Cree la funcion tcga_boxplots para visualizar boxplots y jitterplots. El único parámetro de la función es dataset. La función debe crear un boxplot de los niveles de expresión para cada gen.
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 2.2 Utilizando la función lapply() genera la lista cancertype_boxplots con las gráficas para cada tipo de cancer (cada tipo de dataset).
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 2.3 Guarde en el subdirectorio result el tercer plot de la lista cancertype_boxplots con el nombre boxplot3.png. La definición de a figura debe ser de 300dpi.
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 2.4 Escriba la función reg_gen_expression, con el parámetro gen. En este caso la función visualizará una gráfica de nube de puntos (geom_point) y una regresión por tipo de “dataset”. La gráfica será de comparación de gen1 con gen2; por ejemplo en el eje “x” GATA3 y en el eje “y”” FN1.
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 2.5. Utilizando la función lapply() genera la lista reg_genplots con las gráficas para cada par de genes posibles. Recuerde que tiene 7 tipos de genes, se debe tener todas las combinaciones posibles por pares de genes (combinatoria sin repetición).
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 2.6. Guarde en el subdirectorio result el onceavo plot de la lista reg_genplots con el nombre regresion11.pdf. La definición de a figura debe ser de 300dpi.
+
+```{r setup, include=FALSE}
+
+
+```
+
+#### 2.7. Interprete los resultados de las figuras boxplot3.png y regresion11.pdf.
+
+```{r setup, include=FALSE}
+
 
 ```
