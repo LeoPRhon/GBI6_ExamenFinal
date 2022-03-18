@@ -43,26 +43,26 @@ head(df)
 ```{r funcion_long}
 # Escriba aquí la función long_df
 long_df=function(df) {
-  m=data.frame(id=1:1463)
+  p=data.frame(id=1:1463)
 
   x=as.matrix(df)
-m=cbind(m,rep(x[,2],7))
+p=cbind(m,rep(x[,2],7))
  
- m$id=NULL
- names(m)=names(df[,c(2)])
- Tratamiento=NULL
+ p$id=NULL
+ names(p)=names(df[,c(2)])
+ CA=NULL
 
  for (i in 3:9) {
-    Tratamiento=c(Tratamiento,x[,i])
+    CA=c(CA,x[,i])
  }
 
  n=names(df[,3:9])
  N_name=c(rep(n[1],1463),rep(n[2],1463),rep(n[3],1463),rep(n[4],1463),rep(n[5],1463),rep(n[6],1463),rep(n[7],1463))
 
- m=cbind(N_name,Tratamiento,m)
+ p=cbind(N_name,CA,p)
 
-  names(m)=c("gen", "expresion_level", "dataset")
-   return(m)
+  names(p)=c("gen", "expresion_level", "dataset")
+   return(p)
 }
 
 
@@ -119,7 +119,7 @@ n=NULL
  
  for (i in 1:length(levels(m$fac1))){
    
-    j=ggplot(m%>%filter(fac1==nom[i]),aes(fac1,ind1))+geom_jitter()+geom_boxplot(alpha=0.3)+xlab("Tipo de Cancer")+ylab("gen")+
+    j=ggplot(m%>%filter(fac1==nom[i]),aes(fac1,ind1))+geom_jitter()+geom_boxplot(alpha=0.3)+xlab("Tipo de Cancer")+ylab("Gen")+
 theme_bw()+theme(legend.position='none')
     n[[i]]=j
 
@@ -133,7 +133,7 @@ head(df_long)
 
 #### 2.2 Utilizando la función lapply() genera la lista cancertype_boxplots con las gráficas para cada tipo de cancer (cada tipo de dataset).
 
-```{r list_boxplots, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+```{r list_boxplots, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, paged.print=FALSE}
 
 cancertype_boxplots=tcga_boxplots(df_long)
 
