@@ -81,8 +81,7 @@ descr(CAMama) %>% tab_df(title = "Estadistica descriptiva del cáncer de MAMA y 
 
 #### 1.6 Interprete los resultados de la tabla resultante de la sección 1.5.
 
-```{r}
-# Escriba aquí su interpretación 
+```{tex}
 # Los genes con más expresión fueron ESR1 y MUC1, mientras GATA3 y XBP1
 # tuvieron una menor expresión en comparación de todos los genes.
 ```
@@ -292,7 +291,8 @@ ggsave("D:/Documentos/GitHub/GBI6_ExamenFinal/results/regresion11.pdf", width = 
 #### 2.7. Interprete los resultados de las figuras boxplot3.png y regresion11.pdf.
 
 ```{tex}
-# Existe un dato atípico, el cual es el gen LUSC, esto quiere decir que existe sobreexpresión en ese gen, 
-# Como además otro gen que está en tendencia hacia una sobrexpresión genética como el gen mencionado anteriormente.
+# Existe un dato atípico, el cual es el gen LUSC, esto quiere decir que existe sobreexpresión
+# en ese gen, Como además otro gen que está en tendencia hacia una sobrexpresión genética
+# como el gen mencionado anteriormente.
 
 ```

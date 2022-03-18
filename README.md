@@ -28,46 +28,19 @@ Memoria: 16384 MB RAM
 
 - readr
 
-- 
+- tidyverse
 
-- 
+- tidyr
 
-- 
+- dplyr
 
-- 
+- sjPlot
 
-- 
+- sjmisc
 
-- 
+- ggplot2
 
-- 
-
-- 
-
-- 
-
-- 
-
-- 
-
-- 
-
-- 
-
-- 
-
-- 
 
 # Explicación de la data utilizada
 
-- 
-
-- 
-
-- 
-
-- 
-
--  
-
-- 
+Se usó una base de datos sobre diferentes genes que posiblemente influencien el cáncer de Mama. Por lo que se usó varias herramientas de librerias que nos permite manejar la base de datos para generar boxplots y regresiones lineales.
