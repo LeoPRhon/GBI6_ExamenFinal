@@ -20,9 +20,11 @@ output:
 
 ## Resolución del Examen Final
 ### Pregunta 1: Manipulación de datos
+
 #### 1.1. Defina su directorio de trabajo.
 
-```{r setup, include=FALSE}
+```{r wd, include=TRUE}
+
 setwd("D:/Documentos/GitHub/GBI6_ExamenFinal")
 
 ```
@@ -38,78 +40,167 @@ head(df)
 
 #### 1.3.Cree una función de nombre long_df para transformar la data df de la forma wide a long.
 
-```{r setup, include=FALSE}
+```{r funcion_long}
+# Escriba aquí la función long_df
+long_df=function(df) {
+  m=data.frame(id=1:1463)
+
+  x=as.matrix(df)
+m=cbind(m,rep(x[,2],7))
+ 
+ m$id=NULL
+ names(m)=names(df[,c(2)])
+ Tratamiento=NULL
+
+ for (i in 3:9) {
+    Tratamiento=c(Tratamiento,x[,i])
+ }
+
+ n=names(df[,3:9])
+ N_name=c(rep(n[1],1463),rep(n[2],1463),rep(n[3],1463),rep(n[4],1463),rep(n[5],1463),rep(n[6],1463),rep(n[7],1463))
+
+ m=cbind(N_name,Tratamiento,m)
+
+  names(m)=c("gen", "expresion_level", "dataset")
+   return(m)
+}
+
 
 
 ```
 
 #### 1.4.Genere la data df_long utilizandola función long_df.
 
-```{r setup, include=FALSE}
+```{r df_long}
+# Genere la data df_long 
+df_long=long_df(df)
 
 
+head(df_long)
 ```
 
 #### 1.5 A partir de la data df_long, genere un Descriptive table (librería sjPlot) y guárdelo en el subdirectorio “result” con el nombre mRNA_expr_summary.doc (previamente debe seleccionar las celdas adecuadas con funciones de la librería dplyr en conjunto con el operador %>%).
 
-```{r setup, include=FALSE}
+```{r desc_table}
+# Escriba el código para crear el Descriptive table 
+library(sjPlot)
+library(dplyr)
+library(sjmisc)
+df_long$gen=as.factor(df_long$gen)
+df_long$dataset=as.factor(df_long$dataset)
+  df_long$expresion_level=as.numeric(df_long$expresion_level)
+result=descr(df_long%>%select(expresion_level,dataset)%>%group_by(dataset))
 
 
 ```
 
 #### 1.6 Interprete los resultados de la tabla resultante de la sección 1.5.
 
-```{r setup, include=FALSE}
-
+```{r}
+# Escriba aquí su interpretación 
 
 ```
 
 ### Pregunta 2: Visualización de datos
 #### 2.1 Cree la funcion tcga_boxplots para visualizar boxplots y jitterplots. El único parámetro de la función es dataset. La función debe crear un boxplot de los niveles de expresión para cada gen.
 
-```{r setup, include=FALSE}
+```{r}
+# Escriba el código para crear la función tcga_boxplots
+library(tidyverse)
 
+tcga_boxplots=function(df1){
+  
+  
+  m=df1[,c(1,2)]
+  names(m)=c("fac1","ind1")
+  nom=as.character(levels(m[,1]))
+n=NULL
+
+ 
+ for (i in 1:length(levels(m$fac1))){
+   
+    j=ggplot(m%>%filter(fac1==nom[i]),aes(fac1,ind1))+geom_jitter()+geom_boxplot(alpha=0.3)+xlab("Tipo de Cancer")+ylab("gen")+
+theme_bw()+theme(legend.position='none')
+    n[[i]]=j
+
+}
+    
+  return(n)
+}
+head(df_long)
 
 ```
 
 #### 2.2 Utilizando la función lapply() genera la lista cancertype_boxplots con las gráficas para cada tipo de cancer (cada tipo de dataset).
 
-```{r setup, include=FALSE}
+```{r list_boxplots, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+
+cancertype_boxplots=tcga_boxplots(df_long)
+
 
 
 ```
 
 #### 2.3 Guarde en el subdirectorio result el tercer plot de la lista cancertype_boxplots con el nombre boxplot3.png. La definición de a figura debe ser de 300dpi.
 
-```{r setup, include=FALSE}
+```{r boxplot3}
+# Escriba el código para guardar la tercera figura de la lista. 
 
 
 ```
 
 #### 2.4 Escriba la función reg_gen_expression, con el parámetro gen. En este caso la función visualizará una gráfica de nube de puntos (geom_point) y una regresión por tipo de “dataset”. La gráfica será de comparación de gen1 con gen2; por ejemplo en el eje “x” GATA3 y en el eje “y”” FN1.
 
-```{r setup, include=FALSE}
+```{r reg_gen_exp}
+# Escriba aquí su función reg_gen_expression
 
+reg_gen_expression=function(df){
+  pablito=combn(1:7,2)
+  graf=NULL
+  df=df%>%select(gen,expresion_level)
+  for (i in 1:ncol(pablito)) {
+    m=NULL
+      x=NULL
+      y=NULL
+      
+      m=c(pablito[,i][1],pablito[,i][2])
+      
+      
+  nom=as.character(levels(df[,1]))
+  
+  x=df[which(df$gen==nom[m[1]]),][,2]
+  y=df[which(df$gen==nom[m[2]]),][,2]
+  dft=data.frame(x,y)
+m=ggplot(data=dft,aes(x,y))+geom_point()+xlab(nom[m[1]])+ylab(nom[m[2]])
+ 
+   graf[[i]]=m
+    
+  }
+  
+  
+
+  return(graf)
+}
 
 ```
 
 #### 2.5. Utilizando la función lapply() genera la lista reg_genplots con las gráficas para cada par de genes posibles. Recuerde que tiene 7 tipos de genes, se debe tener todas las combinaciones posibles por pares de genes (combinatoria sin repetición).
 
-```{r setup, include=FALSE}
-
-
+```{r list_regplots}
+# Escriba el código para generar la lista. 
+reg_genplots=reg_gen_expression(df_long)
 ```
 
 #### 2.6. Guarde en el subdirectorio result el onceavo plot de la lista reg_genplots con el nombre regresion11.pdf. La definición de a figura debe ser de 300dpi.
 
-```{r setup, include=FALSE}
-
+```{r reg11}
+# Escriba el código para guardar el onceavo plot. 
 
 ```
 
 #### 2.7. Interprete los resultados de las figuras boxplot3.png y regresion11.pdf.
 
-```{r setup, include=FALSE}
-
+```{tex}
+# Esciba aquí su intepretación
 
 ```
